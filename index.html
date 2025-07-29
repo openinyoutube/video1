@@ -8,12 +8,12 @@
   <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="Watch this on YouTube!" />
   <meta property="og:description" content="Redirecting you to an amazing video..." />
-  <meta property="og:image" content="https://img.youtube.com/vi/7W-tQErXzjc/maxresdefault.jpg" />
+  <meta property="og:image" content="https://img.youtube.com/vi/7W-tQErXzjczzz/maxresdefault.jpg" />
   <meta property="og:url" content="https://yourdomain.com/redirect.html" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Non-JS fallback for any browser -->
-  <meta http-equiv="refresh" content="0;url=https://youtu.be/7W-tQErXzjc" />
+  <meta http-equiv="refresh" content="0;url=https://youtu.be/7W-tQErXzjczzz" />
 
   <style>
     body {
@@ -51,23 +51,19 @@
 
   <script>
     window.onload = function () {
-      // The new YouTube URL and associated deep links
-      const webUrl    = "https://youtu.be/7W-tQErXzjc";
-      const appUrl    = "vnd.youtube://7W-tQErXzjc";
-      const intentUrl = "intent://youtu.be/7W-tQErXzjc#Intent;package=com.google.android.youtube;scheme=https;end";
+      const webUrl    = "https://youtu.be/7W-tQErXzjczzz";
+      const appUrl    = "vnd.youtube://7W-tQErXzjczzz";
+      const intentUrl = "intent://youtu.be/7W-tQErXzjczzz#Intent;package=com.google.android.youtube;scheme=https;end";
 
       const ua = navigator.userAgent;
-      // Redirect based on the user's operating system
       if (/Android/i.test(ua)) {
         window.location.href = intentUrl;
       } else if (/iPhone|iPad|iPod/i.test(ua)) {
         window.location.href = appUrl;
-        // Fallback for iOS if the app doesn't open
         setTimeout(() => {
           window.location.href = webUrl;
         }, 2500);
       } else {
-        // Fallback for desktop browsers
         window.location.href = webUrl;
       }
     };
@@ -77,7 +73,7 @@
   <div class="loader"></div>
   <div class="message">
     <p>Opening YouTube…</p>
-    <p>If it doesn’t open, <a href="https://youtu.be/7W-tQErXzjc">click here</a>.</p>
+    <p>If it doesn’t open, <a href="https://youtu.be/7W-tQErXzjczzz">click here</a>.</p>
   </div>
 </body>
 </html>

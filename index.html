@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://yourdomain.com/redirect.html" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Non-JS fallback -->
+  <!-- Non-JS fallback for any browser -->
   <meta http-equiv="refresh" content="0;url=https://youtu.be/7W-tQErXzjc" />
 
   <style>
@@ -51,31 +51,25 @@
 
   <script>
     window.onload = function () {
+      // The new YouTube URL and associated deep links
       const webUrl    = "https://youtu.be/7W-tQErXzjc";
       const appUrl    = "vnd.youtube://7W-tQErXzjc";
       const intentUrl = "intent://youtu.be/7W-tQErXzjc#Intent;package=com.google.android.youtube;scheme=https;end";
 
       const ua = navigator.userAgent;
-
-      if (/Instagram/i.test(ua)) {
-        window.location.href = webUrl;
-        return;
-      }
-
+      // Redirect based on the user's operating system
       if (/Android/i.test(ua)) {
         window.location.href = intentUrl;
-        return;
-      }
-
-      if (/iPhone|iPad|iPod/i.test(ua)) {
+      } else if (/iPhone|iPad|iPod/i.test(ua)) {
         window.location.href = appUrl;
+        // Fallback for iOS if the app doesn't open
         setTimeout(() => {
           window.location.href = webUrl;
         }, 2500);
-        return;
+      } else {
+        // Fallback for desktop browsers
+        window.location.href = webUrl;
       }
-
-      window.location.href = webUrl;
     };
   </script>
 </head>

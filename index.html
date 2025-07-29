@@ -1,91 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redirecting to YouTube...</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting to YouTube...</title>
 
-  <!-- Open Graph Meta Tags for Social Media Previews -->
-  <meta property="og:title" content="Watch this on YouTube!" />
-  <meta property="og:description" content="Redirecting you to an amazing video..." />
-  <meta property="og:image" content="https://img.youtube.com/vi/7W-tQErXzjc/maxresdefault.jpg" />
-  <meta property="og:url" content="https://youtu.be/7W-tQErXzjc" />
-  <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:title" content="Watch this on YouTube!" />
+  <meta property="og:description" content="Redirecting you to an amazing video..." />
+  <meta property="og:image" content="https://img.youtube.com/vi/BNQI-fHIwbQ/maxresdefault.jpg" />
+  <meta property="og:url" content="https://yourdomain.com/redirect.html" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-  <style>
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
-    .message {
-      font-size: 18px;
-      margin-top: 10px;
-    }
-    .loader {
-      border: 4px solid #333;
-      border-top: 4px solid #0af;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    a {
-      color: #0af;
-      text-decoration: none;
-    }
-  </style>
+    <meta http-equiv="refresh" content="0;url=https://youtu.be/7W-tQErXzjc" />
 
-  <script>
-    function isMobile() {
-      return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    }
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #444;
+      border-top: 5px solid #0af;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    a {
+      color: #0af;
+      text-decoration: none;
+    }
+  </style>
 
-    window.onload = function () {
-      const videoId = "7W-tQErXzjc"; // New video ID
-      const webUrl = https://youtu.be/${videoId};
+  <script>
+    window.onload = function () {
+      const webUrl    = "https://youtu.be/7W-tQErXzjc";
+      const appUrl    = "vnd.youtube://o-YBDTqX_TY";
+      const intentUrl = "intent://https://youtu.be/7W-tQErXzjc";
 
-      if (isMobile()) {
-        if (/Android/i.test(navigator.userAgent)) {
-          // Android: Use intent scheme to trigger Instagram's confirmation prompt
-          const intentUrl = intent://youtu.be/${videoId}#Intent;scheme=https;package=com.google.android.youtube;end;
-          window.location.href = intentUrl;
-
-          // Fallback to web version if app doesn’t open
-          setTimeout(() => {
-            window.location.href = webUrl;
-          }, 2500);
-        } else {
-          // iOS: Attempt to open YouTube app
-          const appUrl = vnd.youtube://${videoId};
-          window.location.href = appUrl;
-
-          // Fallback to web version if app doesn’t open
-          setTimeout(() => {
-            window.location.href = webUrl;
-          }, 2500);
-        }
-      } else {
-        // Desktop: Directly redirect to web version
-        window.location.href = webUrl;
-      }
-    };
-  </script>
+      const ua = navigator.userAgent;
+      if (/Android/i.test(ua)) {
+        // Android: use intent URL (almost always honored)
+        window.location.href = intentUrl;
+      } else if (/iPhone|iPad|iPod/i.test(ua)) {
+        // iOS: try deep-link first, then fallback
+        window.location.href = appUrl;
+        setTimeout(() => {
+          window.location.href = webUrl;
+        }, 2500);
+      } else {
+        // Desktop/others: go straight to web URL
+        window.location.href = webUrl;
+      }
+    };
+  </script>
 </head>
 <body>
-  <div class="loader"></div>
-  <div class="message">
-    <p>Trying to open YouTube app...</p>
-    <p>If nothing happens, <a href="https://youtu.be/7W-tQErXzjc">click here</a>.</p>
-  </div>
+  <div class="loader"></div>
+  <div class="message">
+    <p>Opening YouTube…</p>
+    <p>If it doesn’t open, <a href="https://youtu.be/7W-tQErXzjc">click here</a>.</p>
+  </div>
 </body>
 </html>
